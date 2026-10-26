@@ -3,15 +3,18 @@
 #include <stddef.h>
 #include <stdio.h>
 #include <stdint.h>
+#include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 #include <err.h>
 
+#ifdef __cplusplus
 extern "C" {
+#endif
 
+#define WITH_OPENSSL 1
 #include "crypto_api.h"
-#include "hash.c"
 
 #undef randombytes
 #define USE_SNTRUP761X25519 1
@@ -71,4 +74,6 @@ int LLVMFuzzerTestOneInput(const uint8_t* input, size_t len)
 	return 0;
 }
 
-} // extern
+#ifdef __cplusplus
+} // extern "C"
+#endif
